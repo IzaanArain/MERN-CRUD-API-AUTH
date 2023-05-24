@@ -1,10 +1,14 @@
 const express = require("express");
 require("dotenv").config();
 const TodoRoutes = require("./routes/TodoRoutes");
+const errorHandler = require("./middleware/errorHandler");
+const connectDB = require("./Config/dbConnection");
 
+connectDB()
 const app = express();
 app.use(express.json())
 app.use("/api/todos", TodoRoutes);
+app.use(errorHandler)
 
 
 app.get("/api/test/", (req, res) => {
