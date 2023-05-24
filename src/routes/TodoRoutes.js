@@ -1,7 +1,9 @@
 const express = require("express");
-const {getAllTodo,createTodo,getTodo,updateTodo,deleteTodo}=require("../controller/TodoControllers")
+const {getAllTodo,createTodo,getTodo,updateTodo,deleteTodo}=require("../controller/TodoControllers");
+const validateToken = require("../middleware/ValidateTokenHandler");
 const router = express.Router();
 
+router.use(validateToken)
 router.route("/")
 .get(getAllTodo)
 .post(createTodo);

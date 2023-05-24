@@ -1,6 +1,11 @@
 const mongoose=require("mongoose")
 
 const TodoSchema=mongoose.Schema({
+  user_id:{
+    type:mongoose.Schema.Types.ObjectId,
+    required:true,
+    ref:"User"
+  },
     fname:{
         type:String,
         required: [true,"please enter your first name"],
