@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const UserRoutes = require("./routes/UserRoutes");
 const TodoRoutes = require("./routes/TodoRoutes");
 const errorHandler = require("./middleware/errorHandler");
 const connectDB = require("./Config/dbConnection");
@@ -8,6 +9,7 @@ connectDB()
 const app = express();
 app.use(express.json())
 app.use("/api/todos", TodoRoutes);
+app.use("/api/users", UserRoutes);
 app.use(errorHandler)
 
 

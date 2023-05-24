@@ -61,7 +61,7 @@ const updateTodo=asyncHandler(async(req, res) => {
 //@desc delete todo
 //@route delet /api/todos/:id
 //@access public
-const deleteTodo=(async(req, res) => {
+const deleteTodo=asyncHandler(async(req, res) => {
   const todo=await Todo.findById(req.params.id)
   if(!todo){
     res.status(404);
