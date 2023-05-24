@@ -34,7 +34,6 @@ const TodoSchema=mongoose.Schema({
       },
       city: {
         type: String,
-        require
       },
       activityType: {
         type: String,
