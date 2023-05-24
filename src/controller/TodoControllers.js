@@ -18,13 +18,13 @@ const createTodo=asyncHandler(
     if(!fname || !email){
         throw new Error("name & email field are mandatory")
     }
-    const todo=await Todo.create({
-      fname:fname,
-      lname:lname,
-      email:email,
-      age:age
-    })
-    // const todo=await Todo.create(req.body)
+    // const todo=await Todo.create({
+    //   fname:fname,
+    //   lname:lname,
+    //   email:email,
+    //   age:age
+    // })
+    const todo=await Todo.create(req.body)
     res.status(201).json(todo);
   }
 )
@@ -33,21 +33,42 @@ const createTodo=asyncHandler(
 //@route Get /api/todos/:id
 //@access public
 const getTodo=asyncHandler(async(req, res) => {
-  res.status(200).json({ message: `get todo for ${req.params.id}`});
+  const todo=await Todo.findById(req.params.id)
+  if(!todo){
+    res.status(404);
+    throw Error("Todo not found")
+  }
+  res.status(200).json(todo);
 })
 
 //@desc Put todo
 //@route Put /api/todos/:id
 //@access public
 const updateTodo=asyncHandler(async(req, res) => {
-  res.status(200).json({ message: `update todo for ${req.params.id}`});
+  const todo=await Todo.findById(req.params.id)
+  if(!todo){
+    res.status(404);
+    throw Error("Todo not found")
+  }
+  const updateTodo=await Todo.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {new: true}
+  )
+  res.status(200).json(updateTodo);
 })
 
 //@desc delete todo
 //@route delet /api/todos/:id
 //@access public
 const deleteTodo=(async(req, res) => {
-  res.status(200).json({ message: `delete todo for ${req.params.id}`});
+  const todo=await Todo.findById(req.params.id)
+  if(!todo){
+    res.status(404);
+    throw Error("Todo not found")
+  }
+  await Todo.findByIdAndDelete(req.params.id)
+  res.status(200).json(todo);
 })
 
   module.exports={
