@@ -55,7 +55,7 @@ const getTodo = asyncHandler(async (req, res) => {
   const todo = await Todo.findById(req.params.id);
   if (!todo) {
     res.status(404);
-    throw Error("Todo not found");
+    throw new Error("Todo not found");
   }
   res.status(200).json(todo);
 });
@@ -88,7 +88,7 @@ const deleteTodo = asyncHandler(async (req, res) => {
   const todo = await Todo.findById(req.params.id);
   if (!todo) {
     res.status(404);
-    throw Error("Todo not found");
+    throw new Error("Todo not found");
   }
 
   if(todo.user_id.toString()!==req.user.id){
