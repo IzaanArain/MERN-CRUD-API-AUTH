@@ -72,7 +72,7 @@ const updateTodo = asyncHandler(async (req, res) => {
 
   if(todo.user_id.toString()!==req.user.id){
     res.status(403);
-    throw new Error("user des not have permission to update other user Todos")
+    throw new Error("user does not have permission to update other user Todos")
   }
 
   const updateTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
@@ -93,9 +93,9 @@ const deleteTodo = asyncHandler(async (req, res) => {
 
   if(todo.user_id.toString()!==req.user.id){
     res.status(403);
-    throw new Error("user des not have permission to update other user Todos")
+    throw new Error("user does not have permission to update other user Todos")
   }
-  
+
   await Todo.findByIdAndDelete(req.params.id);
   res.status(200).json(todo);
 });
